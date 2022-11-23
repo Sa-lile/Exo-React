@@ -11,6 +11,15 @@ class UserController {
         }
     }
 
+    public static async Register( name: string, email: string, telephone: string, password: string ) {
+        const user: any = await UserModel.selectUserByEmail(email);
+        if ( user && user.password === password) {
+            return true
+        } else {
+            return false
+        }
+    }
+
 }
 
 export = UserController
