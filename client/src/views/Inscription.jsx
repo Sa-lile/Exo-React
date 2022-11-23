@@ -1,6 +1,7 @@
 import { Button, TextField } from '@mui/material';
 import { Box } from '@mui/system';
 import { useState } from 'react';
+import axios from 'axios';
 
 export const INSCRIPTION_TITLE = 'Inscription';
 
@@ -26,9 +27,23 @@ export function Register() {
         setPassword(e.target.value)
     }
 
+    // Send information to the server (data)
     const tryRegister = () => {
-        /* axios.post('/api/login', { name: name,email: email, telephone:telephone}) */
-    };
+        const data = { 
+            name: name,
+            email: email,
+            telephone: telephone, 
+            password: password 
+        }
+        console.log("data", data)
+		axios.post('http://localhost:3001/api/user/Inscription', data)
+			.then((res) => {
+                console.log("result", res)
+            })
+			.catch((err) => {
+                console.log("error", err)
+            });
+	};
 
     return (
         <Box className="exo_regidter">
