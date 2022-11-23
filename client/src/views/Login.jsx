@@ -5,11 +5,11 @@ import axios from 'axios';
 export const LOGIN_TITLE = 'Login';
 
 export function Form() {
-	const [name, setName] = useState('');
+	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
-	const handleNameChange = (e) => {
-		setName(e.target.value);
+	const handleEmailChange = (e) => {
+		setEmail(e.target.value);
 	};
 
 	const handlePasswordChange = (e) => {
@@ -18,7 +18,7 @@ export function Form() {
 
 	const tryLogin = () => {
         const data = { 
-            name: name, 
+            email: email, 
             password: password 
         }
         console.log("data", data)
@@ -33,7 +33,7 @@ export function Form() {
 
 	return (
 		<Box className="exo_form exo_form_login">
-			<TextField id="outlined-basic" label="name" variant="outlined" value={name} onChange={handleNameChange} />
+			<TextField id="outlined-basic" label="email" type="email" variant="outlined" value={email} onChange={handleEmailChange} />
 			<TextField id="outlined-basic" label="password" type="password" variant="outlined" value={password} onChange={handlePasswordChange} />
 			<Button onClick={tryLogin} variant="contained">
 				Connexion
