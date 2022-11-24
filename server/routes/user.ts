@@ -37,5 +37,4 @@ userRouter.get('/list', async function(req, res) {
 
 
 
-
 export = userRouter;
