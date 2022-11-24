@@ -51,7 +51,7 @@ export function Register() {
 			<TextField id="outlined-name" label="Name" value={name} onChange={handleNameChange} />
 			<TextField id="outlined-basic" label="Email" type="Email" variant="outlined" value={email} onChange={handleEmaildChange} />
 			<TextField id="outlined-basic" label="Téléphone" type="Telephone" variant="outlined" value={telephone} onChange={handleTelephoneChange} />
-			<TextField id="outlined-basic" label="password" type="password" variant="outlined" value={password} onChange={handlePasswordChange} />
+			<TextField id="outlined-basic" label="Password" type="password" variant="outlined" value={password} onChange={handlePasswordChange} />
 			<Button onClick={tryRegister} variant="contained">
 				Envoyer
 			</Button>

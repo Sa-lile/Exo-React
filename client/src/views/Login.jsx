@@ -33,8 +33,8 @@ export function Form() {
 
 	return (
 		<Box className="exo_form exo_form_login">
-			<TextField id="outlined-basic" label="email" type="email" variant="outlined" value={email} onChange={handleEmailChange} />
-			<TextField id="outlined-basic" label="password" type="password" variant="outlined" value={password} onChange={handlePasswordChange} />
+			<TextField id="outlined-basic" label="Email" type="email" variant="outlined" value={email} onChange={handleEmailChange} />
+			<TextField id="outlined-basic" label="Password" type="password" variant="outlined" value={password} onChange={handlePasswordChange} />
 			<Button onClick={tryLogin} variant="contained">
 				Connexion
 			</Button>
