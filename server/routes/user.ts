@@ -23,12 +23,16 @@ userRouter.post('/inscription', async function(req, res) {
     const email: string = req.body.email
     const telephone: string = req.body.telephone
     const password: string = req.body.password
-    res.send( await UserController.Register(name, email, telephone, password))
+    const result: boolean = await UserController.Register(name, email, telephone, password)
+    if ( result ) {
+        res.send( true )
+    } else {
+        res.status(422).send( "email is already used" )
+    }
 })
 
-userRouter.post('/list', function(req, res) {
-    console.log("list");
-    res.send("list");
+userRouter.get('/list', async function(req, res) {
+    res.send( await UserController.List() )
 })
 
 

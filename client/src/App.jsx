@@ -6,6 +6,9 @@ import Login from './views/Login';
 import List from './views/List';
 import Page404 from './views/Page404';
 import MainMenu from './menu/MainMenu';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const TutoRoutes = () => {
 	return (
@@ -27,6 +30,17 @@ function App() {
 	return (
 		<div className="App">
 			<TutoRoutes />
+			<ToastContainer
+                position="bottom-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
 		</div>
 	);
 }

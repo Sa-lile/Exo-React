@@ -17,18 +17,19 @@ export function Form() {
 	};
 
 	const tryLogin = () => {
-        const data = { 
-            email: email, 
-            password: password 
-        }
-        console.log("data", data)
-		axios.post('http://localhost:3001/api/user/login', data)
+		const data = {
+			email: email,
+			password: password,
+		};
+		console.log('data', data);
+		axios
+			.post('http://localhost:3001/api/user/login', data)
 			.then((res) => {
-                console.log("result", res)
-            })
+				console.log('result', res);
+			})
 			.catch((err) => {
-                console.log("error", err)
-            });
+				console.log('error', err);
+			});
 	};
 
 	return (

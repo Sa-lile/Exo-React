@@ -1,6 +1,7 @@
 import { Button, TextField } from '@mui/material';
 import { Box } from '@mui/system';
 import { useState } from 'react';
+import { toast } from 'react-toastify'
 import axios from 'axios';
 
 export const INSCRIPTION_TITLE = 'Inscription';
@@ -35,13 +36,27 @@ export function Register() {
 			telephone: telephone,
 			password: password,
 		};
-		console.log('data', data);
+		const id = toast.loading("Please wait...")
 		axios
 			.post('http://localhost:3001/api/user/inscription', data)
 			.then((res) => {
+				toast.update(id, { render:'Register is succesfull', type: "success", isLoading: false, autoClose: 5000 })
+				setName('')
+				setEmail('')
+				setTelephone('')
+				setPassword('')
 				console.log('result', res);
 			})
 			.catch((err) => {
+				/* let message = ''
+				if ( err && err.response && err?.response?.data ) {
+					message = err.response.data
+				} else {
+					message = 'Error while Registering'
+				}
+				let message3 = err?.response?.data ? err.response.data : 'Error while Registering' */
+				let message2 = err?.response?.data ?? 'Error while Registering'
+				toast.update(id, { render: message2.toUpperCase(), type: "error", isLoading: false, autoClose: 5000 })
 				console.log('error', err);
 			});
 	};
