@@ -17,14 +17,18 @@ userRouter.post('/login', async function(req, res) {
     res.send( await UserController.Login(email, password))
 })
 
-userRouter.post('/inscription', function(req, res) {
-    console.log("inscription");
-    res.send("inscription ");
+userRouter.post('/inscription', async function(req, res) {
+    console.log("body", req.body);
+    const name: string = req.body.name
+    const email: string = req.body.email
+    const telephone: string = req.body.telephone
+    const password: string = req.body.password
+    res.send( await UserController.Register(name, email, telephone, password))
 })
 
-userRouter.get('/test2', function(req, res) {
-    console.log("test2");
-    res.send("Tapez le button ");
+userRouter.post('/list', function(req, res) {
+    console.log("list");
+    res.send("list");
 })
 
 
