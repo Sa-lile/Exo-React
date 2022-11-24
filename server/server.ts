@@ -1,6 +1,7 @@
 import express from 'express';
 import router from './routes/router';
 import cors from 'cors'
+import UserController from './controller/UserController';
 
 const app = express();
 

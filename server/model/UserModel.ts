@@ -12,15 +12,16 @@ class UserModel {
 		}
 	}
 
-	public static async Register(name: string, email: string, telephone: string, password: string) {
+	public static async Register(name: string, email: string, telephone: string, password: string, salt: string) {
 		const db = Database.pool.promise();
-		let query = 'INSERT INTO `user` (`name`, `email`, `telephone`, `password`) VALUES ( ?, ?, ?, ?);';
+		let query = 'INSERT INTO `user` (`name`, `email`, `telephone`, `password`, `salt`) VALUES ( ?, ?, ?, ?, ?);';
 		return new Promise((resolve, reject) => {
-			db.execute(query, [name, email, telephone, password])
+			db.execute(query, [name, email, telephone, password, salt])
 				.then((res) => {
 					resolve(true);
 				})
 				.catch((err) => {
+					console.log( err )
 					resolve(false);
 				});
 		});
