@@ -40,6 +40,15 @@ class UserController {
         return hashHex;
     }
 
+    /**
+     * Register
+     * function to register a user in the app
+     * @param name name of the user
+     * @param email email of the user
+     * @param telephone telephone of the user
+     * @param password password of the user
+     * @returns {boolean} true if register is sucessfull else false
+     */
 	public static async Register(name: string, email: string, telephone: string, password: string) {
 		//TODO generate random string of 10 characters letters and numbers
         const salt = UserController.generateRandomString(10)

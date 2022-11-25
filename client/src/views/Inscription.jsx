@@ -2,7 +2,7 @@ import { Button, TextField } from '@mui/material';
 import { Box } from '@mui/system';
 import { useState } from 'react';
 import { toast } from 'react-toastify'
-import axios from 'axios';
+import { axiosCustomInstance } from '../conf/axiosConf';
 
 export const INSCRIPTION_TITLE = 'Inscription';
 
@@ -37,8 +37,8 @@ export function Register() {
 			password: password,
 		};
 		const id = toast.loading("Please wait...")
-		axios
-			.post('http://localhost:3001/api/user/inscription', data)
+		axiosCustomInstance
+			.post('/user/inscription', data)
 			.then((res) => {
 				toast.update(id, { render:'Register is succesfull', type: "success", isLoading: false, autoClose: 5000 })
 				setName('')

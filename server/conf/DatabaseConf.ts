@@ -1,12 +1,18 @@
-import mysql from 'mysql2'
+import mysql from 'mysql2/promise'
+import dotenv from "dotenv";
+import * as expressSession from 'express-session';
+import expressMysqlSession from 'express-mysql-session';
 
-const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    database: 'exo-react',
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0
-});
+dotenv.config()
 
-export default { pool }
+const DBConf = {
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    port: parseInt(process.env.DB_PORT as string)
+}
+
+const MySQLStore = expressMysqlSession(expressSession)
+export const Database = mysql.createPool(DBConf);
+export const SessionStore = new MySQLStore({}, Database );

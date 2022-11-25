@@ -3,30 +3,36 @@ import './App.css';
 import Home from './views/Home';
 import Inscription from './views/Inscription';
 import Login from './views/Login';
-import List from './views/List';
+import ListUsers from './views/ListUsers';
+import ListProducts  from './views/ListProducts';
 import Page404 from './views/Page404';
 import MainMenu from './menu/MainMenu';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useState } from 'react';
 
-
-const TutoRoutes = () => {
-	return (
-		<BrowserRouter>
-			<MainMenu />
-			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="/inscription" element={<Inscription />} />
-				<Route path="/login" element={<Login />} />
-				<Route path="/list" element={<List />} />
-				<Route path="/404" element={<Page404 />} />
-				<Route path="*" element={<Navigate to="/404" />} />
-			</Routes>
-		</BrowserRouter>
-	);
-};
 
 function App() {
+	
+	const [logged, setLogged] = useState(false)
+
+	const TutoRoutes = () => {
+		return (
+			<BrowserRouter>
+				<MainMenu logged={logged} setLogged={setLogged} />
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path="/inscription" element={<Inscription />} />
+					<Route path="/login" element={<Login logged={logged} setLogged={setLogged} />} />
+					<Route path="/listUsers" element={<ListUsers />} />
+					<Route path="/listProducts" element={<ListProducts />} />
+					<Route path="/404" element={<Page404 />} />
+					<Route path="*" element={<Navigate to="/404" />} />
+				</Routes>
+			</BrowserRouter>
+		);
+	};
+
 	return (
 		<div className="App">
 			<TutoRoutes />
