@@ -1,4 +1,5 @@
 import express from 'express'
+import ProductController from "../controller/ProductController";
 
 const productRouter = express.Router();
 
@@ -13,4 +14,30 @@ const productRouter = express.Router();
  * example user/list
 */
 
+productRouter.post('/product', async function(req, res) {
+    const email: string = req.body.name
+    const price: Float32Array = req.body.price
+    const quantity: Int16Array = req.body.quantity
+
+    // let result = await ProductController.ListProducts(name, price, quantity)
+    // if ( result ) {
+    //     req.session.save(function(err) {
+    //         if ( err ) {
+    //             res.status(500).send("Error while creating session")
+    //         } else {
+    //             req.session.connected = true
+    //             res.send(true)
+    //         }
+    //     })
+    // } else {
+    //     res.status(403).send("Connection Failed")
+    // }
+})
+productRouter.get('/product', async function(req, res) {
+    // if ( req.session.connected ) {
+    //     res.send( await productRouter.ListProducts() )
+    // } else {
+    //     res.status(401).send('You need to be connected to access this information')
+    // }
+})
 export = productRouter
