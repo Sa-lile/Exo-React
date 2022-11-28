@@ -30,6 +30,7 @@ class UserModel {
 		const [rows, fields] = await Database.execute(query);
 		return rows;
 	}
+
 }
 
 export = UserModel;

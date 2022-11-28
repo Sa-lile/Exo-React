@@ -5,6 +5,7 @@ import cors from 'cors'
 
 import router from './routes/router';
 import { SessionStore } from './conf/DatabaseConf'
+import ProductController from './controller/ProductController';
 
 dotenv.config()
 
@@ -34,3 +35,10 @@ app.use("/api", router)
 app.listen( process.env.SERVER_PORT, function(){
     console.log(`Server running on port ${process.env.SERVER_PORT}`);
 })
+
+const test = async () => {
+    var res2 = await ProductController.Get();
+    console.log(res2)
+}
+
+test()
