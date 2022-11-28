@@ -36,9 +36,10 @@ app.listen( process.env.SERVER_PORT, function(){
     console.log(`Server running on port ${process.env.SERVER_PORT}`);
 })
 
+//  * How to tester the list *
 const test = async () => {
     var res2 = await ProductController.Get();
     console.log(res2)
 }
 
-test()
+ test()

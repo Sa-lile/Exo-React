@@ -9,14 +9,14 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { axiosCustomInstance } from '../conf/axiosConf';
 import { Button, IconButton, TextField } from '@mui/material';
-import { Add, Delete, Edit } from '@mui/icons-material';
-
+import { Add, Cancel, Delete, Edit, Save } from '@mui/icons-material';
 export const LIST_TITLE_PRODUCTS = 'List Products';
 
-const ListProducts = () => {
-
+function ListProducts() {
 	const [rows, setRows] = useState([]);
 	const [showCreate, setShowCreate] = useState(false);
+	
+	const [name, setName] = useState('');
 
 	useEffect(() => {
 		// Once executed
@@ -70,29 +70,67 @@ const ListProducts = () => {
 
 	const ShowCreateButton = () => {
 		return (
-			<Button variant="contained" startIcon={<Add />} onClick={ (e) => setShowCreate(true)}>
+			<Button variant="contained" startIcon={<Add />} onClick={(e) => setShowCreate(true)}>
 				Create
 			</Button>
-		)
-	}
+		);
+	};
 
 	const ShowCreateFields = () => {
 		return (
-			<TextField type="text"></TextField>
-		)
+			<TableHead className="TableCreate">
+				<TableRow>
+					<TableCell align="right">
+						<TextField label="Name" type="text" value={name} onChange={(e) => setName(e.target.value)}/>
+					</TableCell>
+				</TableRow>
+				<TableRow>
+					<TableCell align="right">
+						<TextField label="Price" type="text"/>
+					</TableCell>
+				</TableRow>
+					<TableCell align="right">
+						<TextField label="Quantity" type="text"/>
+					</TableCell>
+				<TableRow>
+					<TableCell align="right">
+						<Button variant="contained" startIcon={<Cancel />} onClick={(e) => setShowCreate(true)}>
+							CANCEL
+						</Button>
+					</TableCell>
+					<TableCell align="right">
+						<Button variant="contained" startIcon={<Save />} onClick={(e) => setShowCreate(true)}>
+							Submit
+						</Button>
+					</TableCell>
+				</TableRow>
+			</TableHead>
+		);
+	};
+
+	/* ???  */
+	const [SaveListProducts] = useState([]);
+
+	useEffect(() => {
+		UpdateInformations();
+	}, [SaveListProducts]);
+	function UpdateInformations() {
+		axiosCustomInstance.get('product');
+	}
+
+	const ChangeListProduits = () => {
+		return (ChangeListProduits);
+
 	}
 
 	return (
 		<div>
 			<h1>{LIST_TITLE_PRODUCTS}</h1>
-			{
-				showCreate ?
-				<ShowCreateFields/>
-				: <ShowCreateButton/>
-			}
+			{showCreate ? <ShowCreateFields /> : <ShowCreateButton />}
+
 			<ListTable />
 		</div>
 	);
-};
+}
 
 export default ListProducts;

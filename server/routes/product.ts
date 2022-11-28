@@ -19,25 +19,6 @@ const productRouter = express.Router();
  * example user/list
  */
 
-// productRouter.post('/product', async function (req, res) {
-// 	const name: string = req.body.name
-// 	const price: Float32Array = req.body.price
-// 	const quantity: Int16Array = req.body.quantity
-// 	let result = await ProductController.Product(name, price, quantity)
-    
-// 	if (result) {
-// 		req.session.save(function (err) {
-// 			if (err) {
-// 				res.status(500).send('Error while creating session');
-// 			} else {
-// 				req.session.connected = true;
-// 				res.send(true);
-// 			}
-// 		});
-// 	} else {
-// 		res.status(403).send('Connection Failed');
-// 	}
-// })
 
 productRouter.post('/', async function (req, res) {
 	console.log('body', req.body)
@@ -55,5 +36,14 @@ productRouter.post('/', async function (req, res) {
 productRouter.get('/list', async function (req, res) {
 	res.send(await ProductController.Get());
 });
+
+productRouter.post('/product', async function (req, res) {
+	console.log('body', req.body)
+	const name: string = req.body.name
+	const price: number = req.body.price
+	const quantity: number = req.body.quantity
+	const result: boolean = await ProductController.Create(name, price, quantity);
+	res.send(result)
+})
 
 export = productRouter;

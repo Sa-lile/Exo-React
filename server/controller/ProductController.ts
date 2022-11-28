@@ -11,15 +11,16 @@ class ProductController {
      * @returns {boolean} true if register is sucessfull else false
      * */
 
-public static async Create(name: string, price: number, quantity: number) {
-    const result: any = await ProductModel.Create(name, price, quantity);
-    return result;
-}
+    public static async Create(name: string, price: number, quantity: number) {
+        const result: any = await ProductModel.Create(name, price, quantity);
+        return result;
+    }
 
     public static async Get() {
 		const result: any = await ProductModel.Get();
 		return result;
 	}
+    
 }
 
 export= ProductController;

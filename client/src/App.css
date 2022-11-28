@@ -43,6 +43,10 @@
   margin-top: 1rem !important;
 }
 
+.TableCreate {
+   margin-bottom: 4rem;
+}
+
 
 @keyframes logo-spin {
   from {
