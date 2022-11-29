@@ -38,8 +38,8 @@ app.listen( process.env.SERVER_PORT, function(){
 
 //  * How to tester the list *
 const test = async () => {
-    var res2 = await ProductController.Get();
+    var res2 = await ProductController.List();
     console.log(res2)
 }
 
- test()
+test()

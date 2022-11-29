@@ -25,7 +25,6 @@ class UserModel {
 		});
 	}
 	public static async List() {
-		// let query = 'INSERT INTO user (`name`, `password`, `email`, `telephone`) VALUES ( ?, ?, ?, ?);';
 		let query = 'SELECT `name`, `email`, `telephone` FROM user';
 		const [rows, fields] = await Database.execute(query);
 		return rows;

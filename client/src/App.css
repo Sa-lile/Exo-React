@@ -32,21 +32,17 @@
 
 } */
 
-.exo_regidter {
+.exoRegister {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
+  margin: 1rem 0;
 }
 
-.exo_regidter > * {
+.exoRegister > * {
   margin-top: 1rem !important;
 }
-
-.TableCreate {
-   margin-bottom: 4rem;
-}
-
 
 @keyframes logo-spin {
   from {

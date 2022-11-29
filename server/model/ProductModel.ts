@@ -16,8 +16,8 @@ class ProductModel {
 		});
 	}
 
-	public static async Get() {
-		let query = 'SELECT `name`, `price`, `quantity` FROM product';
+	public static async List() {
+		let query = 'SELECT `id`, `name`, `price`, `quantity` FROM product';
 		const [rows, fields] = await Database.execute(query);
 		return rows;
 	}
@@ -38,6 +38,7 @@ class ProductModel {
 
 	public static async Delete(id: number) {
 		let query = 'DELETE FROM `product` WHERE `product`.`id` = ? ';
+		console.log("ProductModel", "Delete", id)
 		return new Promise((resolve, reject) => {
 			Database.execute(query, [id])
 				.then((res) => {
@@ -50,17 +51,17 @@ class ProductModel {
 		});
 	}
 
-	public static async Save() {
-		let query = 'SELECT `name`, `price`, `quantity` FROM product';
-		const [rows, fields] = await Database.execute(query);
-		return this.Save;
-	}
-	/* Save BDD of products  */
-	public static async SaveListProducts() {
-		let query = 'SELECT `name`, `price`, `quantity` FROM product';
-		const [rows, fields] = await Database.execute(query);
-		return this.SaveListProducts;
-	}
+	// public static async Save() {
+	// 	let query = 'SELECT `name`, `price`, `quantity` FROM product';
+	// 	const [rows, fields] = await Database.execute(query);
+	// 	return this.Save;
+	// }
+	// /* Save BDD of products  */
+	// public static async SaveListProducts() {
+	// 	let query = 'SELECT `name`, `price`, `quantity` FROM product';
+	// 	const [rows, fields] = await Database.execute(query);
+	// 	return this.SaveListProducts;
+	// }
 }
 
 export = ProductModel;

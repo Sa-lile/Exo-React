@@ -20,8 +20,7 @@ const productRouter = express.Router();
  */
 
 
-productRouter.post('/', async function (req, res) {
-	console.log('body', req.body)
+productRouter.post('/create', async function (req, res) {
 	const name: string = req.body.name
 	const price: number = req.body.price
 	const quantity: number = req.body.quantity
@@ -29,21 +28,34 @@ productRouter.post('/', async function (req, res) {
 	if (result) {
 		res.send(true);
 	} else {
-		res.status(422).send('product is already used');
+		res.status(500).send('product is already used');
 	}
 });
 
 productRouter.get('/list', async function (req, res) {
-	res.send(await ProductController.Get());
+	res.send(await ProductController.List());
 });
 
-productRouter.post('/product', async function (req, res) {
-	console.log('body', req.body)
-	const name: string = req.body.name
+productRouter.post('/update', async function (req, res) {
+	/* const name: string = req.body.name
 	const price: number = req.body.price
 	const quantity: number = req.body.quantity
 	const result: boolean = await ProductController.Create(name, price, quantity);
-	res.send(result)
-})
+	if (result) {
+		res.send(true);
+	} else {
+		res.status(422).send('product is already used');
+	} */
+});
+
+productRouter.delete('/delete/:id', async function (req, res) {
+	const id: number = parseInt(req.params.id as string)
+	const result: boolean = await ProductController.Delete(id);
+	if (result) {
+		res.send(true);
+	} else {
+		res.status(500).send('error');
+	}
+});
 
 export = productRouter;

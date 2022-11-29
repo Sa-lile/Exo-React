@@ -6,7 +6,7 @@ import { axiosCustomInstance } from '../conf/axiosConf';
 
 export const INSCRIPTION_TITLE = 'Inscription';
 
-export function Register() {
+const Inscription = () => {
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [telephone, setTelephone] = useState('');
@@ -28,6 +28,7 @@ export function Register() {
 		setPassword(e.target.value);
 	};
 
+	
 	// Send information to the server (data)
 	const tryRegister = () => {
 		const data = {
@@ -60,25 +61,25 @@ export function Register() {
 				console.log('error', err);
 			});
 	};
+	
+	const RegisterForm = () => {
+		return (
+			<Box className="exoRegister">
+				<TextField id="outlined-name" label="Name" value={name} onChange={handleNameChange} />
+				<TextField id="outlined-basic" label="Email" type="Email" variant="outlined" value={email} onChange={handleEmaildChange} />
+				<TextField id="outlined-basic" label="Téléphone" type="Telephone" variant="outlined" value={telephone} onChange={handleTelephoneChange} />
+				<TextField id="outlined-basic" label="Password" type="password" variant="outlined" value={password} onChange={handlePasswordChange} />
+				<Button onClick={tryRegister} variant="contained">
+					Envoyer
+				</Button>
+			</Box>
+		);
+	}
 
-	return (
-		<Box className="exo_regidter">
-			<TextField id="outlined-name" label="Name" value={name} onChange={handleNameChange} />
-			<TextField id="outlined-basic" label="Email" type="Email" variant="outlined" value={email} onChange={handleEmaildChange} />
-			<TextField id="outlined-basic" label="Téléphone" type="Telephone" variant="outlined" value={telephone} onChange={handleTelephoneChange} />
-			<TextField id="outlined-basic" label="Password" type="password" variant="outlined" value={password} onChange={handlePasswordChange} />
-			<Button onClick={tryRegister} variant="contained">
-				Envoyer
-			</Button>
-		</Box>
-	);
-}
-
-const Inscription = () => {
 	return (
 		<div>
 			<h1>{INSCRIPTION_TITLE}</h1>
-			<Register />
+			<RegisterForm />
 		</div>
 	);
 };
