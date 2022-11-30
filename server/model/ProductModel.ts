@@ -22,7 +22,7 @@ class ProductModel {
 		return rows;
 	}
 
-	public static async Update(name: string, price: number, quantity: number, id: number) {
+	public static async Update(id: number, name: string, price: number, quantity: number) {
 		let query = 'UPDATE `product` SET `name` = ?, `price` = ?, `quantity` = ? WHERE `product`.`id` = ?';
 		return new Promise((resolve, reject) => {
 			Database.execute(query, [name, price, quantity, id])

@@ -34,17 +34,35 @@ function ListProducts() {
 			});
 	}
 
-	const EditProduct = () => {
+	const StartEditProduct = () => {
+		/**
+		 * TODO
+		 * 1 open CreateProducts with showCreate 
+		 * 
+		 * 2 get row informations and save into a variable { price: ..., id...}
+		 *
+		 * 3 pass variable as props to CreateProducts
+		 *
+		 * 4 Modify CreateProduct check if props of edit exist
+		 *
+		 * 5 Use EditProduct instead of tryRegisterProduct
+		 * 6 Reset everything
+		 */
+	}
+
+	const EditProduct = ( id ) => {
+		const tempId = 7;
 		const data = {
-			id: 6,
-			name: "Vélo tout terrain",
-			price: 100,
-			quantity: 20,
-		}
+			/* id: 6, */
+			name: 'IphoneX',
+			price: 1400,
+			quantity: 3,
+		};
+		console.log(data);
 		axiosCustomInstance
-			.get('/product/update')
+			.post('/product/update/' + tempId, data)
 			.then((res) => {
-				recoverInformations()
+				recoverInformations();
 				/* toast.update(id, { render: 'Your modification is completed', type: 'update', isLoading: false, autoClose: 5000 }); */
 			})
 			.catch((err) => {
@@ -52,13 +70,13 @@ function ListProducts() {
 			});
 	};
 
-	const DeleteProduct = ( id ) => {
-		let url = `/product/delete/${id}`
+	const DeleteProduct = (id) => {
+		let url = `/product/delete/${id}`;
 		console.log(url);
 		axiosCustomInstance
-			.delete( '/product/delete/' + id)
+			.delete('/product/delete/' + id)
 			.then((res) => {
-				recoverInformations()
+				recoverInformations();
 				/* toast.update(id, { render: 'Your registration is deleted', type: 'delete', isLoading: false, autoClose: 5000 }); */
 			})
 			.catch((err) => {
@@ -88,7 +106,7 @@ function ListProducts() {
 								<TableCell align="right">{row.quantity}</TableCell>
 								<TableCell align="right">
 									<IconButton>
-										<Edit onClick={EditProduct} />
+										<Edit onClick={StartEditProduct} />
 									</IconButton>
 									<IconButton>
 										<Delete onClick={() => DeleteProduct(row.id)} />

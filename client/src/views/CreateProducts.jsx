@@ -48,6 +48,14 @@ const CreateProducts = ( props ) => {
 			});
 	};
 
+	const checkIfEditorCreate = () => {
+		if ( true ) { //change condition to check props 4
+			//5
+		} else {
+			tryRegisterProduct()
+		}
+	}
+
     const finishCreate = () => {
         if ( props.setShowCreate ) {
             props.setShowCreate(false)
@@ -63,7 +71,7 @@ const CreateProducts = ( props ) => {
                 <Button onClick={finishCreate} variant="contained">
                     Cancel
                 </Button>
-                <Button onClick={tryRegisterProduct} variant="contained">
+                <Button onClick={checkIfEditorCreate} variant="contained">
                     Envoyer
                 </Button>
             </Box>

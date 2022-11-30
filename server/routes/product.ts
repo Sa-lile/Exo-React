@@ -36,16 +36,21 @@ productRouter.get('/list', async function (req, res) {
 	res.send(await ProductController.List());
 });
 
-productRouter.post('/update', async function (req, res) {
-	/* const name: string = req.body.name
-	const price: number = req.body.price
-	const quantity: number = req.body.quantity
-	const result: boolean = await ProductController.Create(name, price, quantity);
+productRouter.post('/update/:id', async function (req, res) {
+	const id: number = parseInt(req.params.id as string);
+	const name: string = req.body.name;
+	const price: number = req.body.price;
+	const quantity: number = req.body.quantity;
+	console.log("id", id);
+	console.log("name", name);
+	console.log("price", price);
+	console.log("quantity", quantity);
+	const result: boolean = await ProductController.Update(id, name, price, quantity);
 	if (result) {
 		res.send(true);
 	} else {
-		res.status(422).send('product is already used');
-	} */
+		res.status(422).send('Product is already used');
+	} 
 });
 
 productRouter.delete('/delete/:id', async function (req, res) {

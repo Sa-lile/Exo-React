@@ -24,6 +24,11 @@ class ProductController {
 		const result: any = await ProductModel.Delete(id);
 		return result;
 	}
+    
+    public static async Update(id: number, name: string, price: number, quantity: number) {
+		const result: any = await ProductModel.Update(id, name, price, quantity);
+		return result;
+	}
 }
 
 export = ProductController;
