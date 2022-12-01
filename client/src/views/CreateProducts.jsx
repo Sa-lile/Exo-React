@@ -55,13 +55,13 @@ const CreateProducts = (props) => {
 			})
 			.catch((err) => {
 				let message3 = err?.response?.data ?? 'Error while Registering';
-				toast.update(id, { render: message3.toUpperCase(), type: 'error', isLoading: false, autoClose: 5000 });
+				toast.error(id, { render: message3.toUpperCase(), type: 'error', isLoading: false, autoClose: 5000 });
 				console.log('error', err);
 			});
 	};
 
 	const checkIfEditOrCreate = () => {
-		console.log(props.productData);
+		console.log(props.productData); // C'est important de mettre props.EditProduct sinon ne founctionne pas.
 		if ( props.productData?.id && props.EditProduct) {
 			//4 change condition to check props
 			//props.productData(true);
