@@ -9,19 +9,21 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { axiosCustomInstance } from '../conf/axiosConf';
 import { Button, IconButton } from '@mui/material';
-import { Add, Delete, Edit } from '@mui/icons-material';
+import { Add, Delete, Edit} from '@mui/icons-material';
 import CreateProducts from './CreateProducts';
 
 export const LIST_TITLE_PRODUCTS = 'List Products';
 
+
 function ListProducts() {
 	const [rows, setRows] = useState([]);
 	const [showCreate, setShowCreate] = useState(false);
+	const [productData, setProductData] = useState({});
 
 	useEffect(() => {
 		// Once executed
 		recoverInformations();
-	}, [showCreate]);
+	}, []);
 
 	function recoverInformations() {
 		axiosCustomInstance
@@ -34,33 +36,33 @@ function ListProducts() {
 			});
 	}
 
-	const StartEditProduct = () => {
+	const StartEditProduct = (value_id, value_name, value_price, value_quantity) => {
+		setShowCreate(true); //1 open CreateProducts with showCreate
+		const object = {
+			id: value_id,
+			name: value_name,
+			price: value_price,
+			quantity: value_quantity,
+		};
+		setProductData(object); // 2 get row informations and save into a variable { price: ..., id...}
 		/**
 		 * TODO
-		 * 1 open CreateProducts with showCreate 
-		 * 
-		 * 2 get row informations and save into a variable { price: ..., id...}
-		 *
-		 * 3 pass variable as props to CreateProducts
-		 *
-		 * 4 Modify CreateProduct check if props of edit exist
-		 *
 		 * 5 Use EditProduct instead of tryRegisterProduct
 		 * 6 Reset everything
 		 */
-	}
+	};
 
-	const EditProduct = ( id ) => {
-		const tempId = 7;
+	const EditProduct = (id, name, price, quantity) => {
+		// const tempId = 7;
 		const data = {
 			/* id: 6, */
-			name: 'IphoneX',
-			price: 1400,
-			quantity: 3,
+			name: name,
+			price: price,
+			quantity: quantity,
 		};
 		console.log(data);
 		axiosCustomInstance
-			.post('/product/update/' + tempId, data)
+			.post('/product/update/' + id, data)
 			.then((res) => {
 				recoverInformations();
 				/* toast.update(id, { render: 'Your modification is completed', type: 'update', isLoading: false, autoClose: 5000 }); */
@@ -106,7 +108,7 @@ function ListProducts() {
 								<TableCell align="right">{row.quantity}</TableCell>
 								<TableCell align="right">
 									<IconButton>
-										<Edit onClick={StartEditProduct} />
+										<Edit onClick={() => StartEditProduct(row.id, row.name, row.price, row.quantity)} />
 									</IconButton>
 									<IconButton>
 										<Delete onClick={() => DeleteProduct(row.id)} />
@@ -131,7 +133,18 @@ function ListProducts() {
 	return (
 		<div>
 			<h1>{LIST_TITLE_PRODUCTS}</h1>
-			{showCreate ? <CreateProducts showCreate={showCreate} setShowCreate={setShowCreate} /> : <ShowCreateButton />}
+			{showCreate ? (
+				<CreateProducts
+					showCreate={showCreate}
+					setShowCreate={setShowCreate}
+					recoverInformations={recoverInformations}
+					productData={productData} //3 pass variable as props to CreateProducts
+					EditProduct={EditProduct} 
+				/>
+			) : (
+				<ShowCreateButton />
+			)}
+
 			<ListTable />
 		</div>
 	);

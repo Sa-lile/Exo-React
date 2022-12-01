@@ -1,15 +1,24 @@
 import { Button, TextField } from '@mui/material';
 import { Box } from '@mui/system';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { axiosCustomInstance } from '../conf/axiosConf';
 
 /** Create a new product **/
 
-const CreateProducts = ( props ) => {
+const CreateProducts = (props) => {
 	const [name, setName] = useState('');
 	const [price, setPrice] = useState('');
 	const [quantity, setQuantity] = useState('');
+
+	useEffect(() => {
+		//4 Modify CreateProduct check if props of edit exist
+		if (props.productData?.id) {
+			setName(props.productData.name);
+			setPrice(props.productData.price);
+			setQuantity(props.productData.quantity);
+		}
+	}, [props.productData]);
 
 	const handleNameChange = (e) => {
 		setName(e.target.value);
@@ -38,7 +47,10 @@ const CreateProducts = ( props ) => {
 				setName('');
 				setPrice('');
 				setQuantity('');
-                finishCreate();
+				finishCreate();
+				if (props.recoverInformations) {
+					props.recoverInformations();
+				}
 				console.log('result', res);
 			})
 			.catch((err) => {
@@ -48,34 +60,42 @@ const CreateProducts = ( props ) => {
 			});
 	};
 
-	const checkIfEditorCreate = () => {
-		if ( true ) { //change condition to check props 4
-			//5
-		} else {
-			tryRegisterProduct()
+	const checkIfEditOrCreate = () => {
+		console.log(props.productData);
+		if ( props.productData?.id && props.EditProduct) {
+			//4 change condition to check props
+			//props.productData(true);
+			props.EditProduct(
+				props.productData.id,
+				name,
+				price,
+				quantity
+			); //5  Use EditProduct instead of tryRegisterProduct
+		} else {    
+			tryRegisterProduct();
 		}
-	}
+	};
 
-    const finishCreate = () => {
-        if ( props.setShowCreate ) {
-            props.setShowCreate(false)
-        }
-    }
+	const finishCreate = () => {
+		if (props.setShowCreate) {
+			props.setShowCreate(false);
+		}
+	};
 
 	return (
 		<Box className="exoRegister">
-            <TextField id="outlined-name" label="Name" value={name} onChange={handleNameChange} />
-            <TextField id="outlined-basic" label="Price" type="Price" variant="outlined" value={price} onChange={handlePriceChange} />
-            <TextField id="outlined-basic" label="Quantity" type="Quantity" variant="outlined" value={quantity} onChange={handleQuantityChange} />
-            <Box>
-                <Button onClick={finishCreate} variant="contained">
-                    Cancel
-                </Button>
-                <Button onClick={checkIfEditorCreate} variant="contained">
-                    Envoyer
-                </Button>
-            </Box>
-        </Box>
+			<TextField id="outlined-name" label="Name" value={name} onChange={handleNameChange} />
+			<TextField id="outlined-basic" label="Price" type="Price" variant="outlined" value={price} onChange={handlePriceChange} />
+			<TextField id="outlined-basic" label="Quantity" type="Quantity" variant="outlined" value={quantity} onChange={handleQuantityChange} />
+			<Box>
+				<Button onClick={finishCreate} variant="contained">
+					Cancel
+				</Button>
+				<Button onClick={checkIfEditOrCreate} variant="contained">
+					Envoyer
+				</Button>
+			</Box>
+		</Box>
 	);
 };
 

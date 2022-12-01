@@ -10,6 +10,7 @@ import MainMenu from './menu/MainMenu';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState } from 'react';
+import Test from './views/Test';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
 					<Route path="/login" element={<Login logged={logged} setLogged={setLogged} />} />
 					<Route path="/listUsers" element={<ListUsers />} />
 					<Route path="/listProducts" element={<ListProducts />} />
+					<Route path="/test" element={<Test />} />
 					<Route path="/404" element={<Page404 />} />
 					<Route path="*" element={<Navigate to="/404" />} />
 				</Routes>

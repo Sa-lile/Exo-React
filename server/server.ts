@@ -7,6 +7,7 @@ import router from './routes/router';
 import { SessionStore } from './conf/DatabaseConf'
 import ProductController from './controller/ProductController';
 
+
 dotenv.config()
 
 const app = express();
@@ -37,9 +38,9 @@ app.listen( process.env.SERVER_PORT, function(){
 })
 
 //  * How to tester the list *
-const test = async () => {
+/* const test = async () => {
     var res2 = await ProductController.List();
     console.log(res2)
 }
 
-test()
+test() */
